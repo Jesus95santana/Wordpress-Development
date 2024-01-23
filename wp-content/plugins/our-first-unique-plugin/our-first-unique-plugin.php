@@ -12,6 +12,57 @@ class WordCountAndTimePlugin {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'admin_page' ) );
 		add_action( 'admin_init', array( $this, 'settings' ) );
+		add_filter( 'the_content', array( $this, 'if_wrap' ) );
+	}
+
+	public function if_wrap( $content ) {
+		if ( ( is_main_query() && is_single() ) &&
+			(
+				get_option(
+					'wcp_wordcount',
+					'1'
+				) ||
+				get_option(
+					'wcp_charactercount',
+					'1'
+				) ||
+				get_option(
+					'wcp_readtime',
+					'1'
+				)
+			) ) {
+			return $this->create_html( $content );
+		}
+
+		return $content;
+	}
+
+	public function create_html( $content ) {
+		$headline        = esc_html( get_option( 'wcp_headline', 'Post Statistics' ) );
+		$character_count = strlen( strip_tags( $content ) );
+		$html            = "<h3>$headline</h3><p>";
+		// Get word count once
+		if ( get_option( 'wcp_wordcount', '1' ) || get_option( 'wcp_readtime', '1' ) ) {
+			$word_count = str_word_count( strip_tags( $content ) );
+		}
+
+		if ( get_option( 'wcp_wordcount', '1' ) ) {
+			$html .= "This post has $word_count words.<br>";
+		}
+
+		if ( get_option( 'wcp_charactercount', '1' ) ) {
+			$html .= "This post has $character_count characters.<br>";
+		}
+
+		if ( get_option( 'wcp_readtime', '1' ) ) {
+			$html .= 'This post will take about ' . round( $word_count / 225 ) . ' minute(s) to read.<br>';
+		}
+		$html .= '</p>';
+		if ( get_option( 'wcp_location', '0' ) === '0' ) {
+			return "$html $content";
+		}
+
+		return "$content $html";
 	}
 
 	public function settings() {
@@ -104,30 +155,6 @@ class WordCountAndTimePlugin {
 			)
 		);
 	}
-
-	/**
-	 * # Old Code
-	 * public function readtime_html() {
-	 * ?>
-	 * <input type="checkbox" name="wcp_readtime"
-	 * value="1" <?php checked( get_option( 'wcp_readtime' ), 1 ); ?>>
-	 * <?php
-	 * }
-	 *
-	 * public function charactercount_html() {
-	 * ?>
-	 * <input type="checkbox" name="wcp_charactercount"
-	 * value="1" <?php checked( get_option( 'wcp_charactercount' ), 1 ); ?>>
-	 * <?php
-	 * }
-	 *
-	 * public function wordcount_html() {
-	 * ?>
-	 * <input type="checkbox" name="wcp_wordcount"
-	 * value="1" <?php checked( get_option( 'wcp_wordcount' ), 1 ); ?>>
-	 * <?php
-	 * }
-	 */
 
 	public function sanitize_location( $input ) {
 		if ( $input !== '0' && $input !== '1' ) {
