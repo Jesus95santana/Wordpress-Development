@@ -5,6 +5,8 @@
  * Version: 1.0
  * Author: Monkey
  * Author URI: www.google.com
+ * Text Domain: wcpdomain
+ * Domain Path: /languages
  */
 
 
@@ -13,6 +15,15 @@ class WordCountAndTimePlugin {
 		add_action( 'admin_menu', array( $this, 'admin_page' ) );
 		add_action( 'admin_init', array( $this, 'settings' ) );
 		add_filter( 'the_content', array( $this, 'if_wrap' ) );
+		add_action( 'init', array( $this, 'languages' ) );
+	}
+
+	public function languages() {
+		load_plugin_textdomain(
+			'wcpdomain',
+			false,
+			dirname( plugin_basename( __FILE__ ) ) . '/languages'
+		);
 	}
 
 	public function if_wrap( $content ) {
@@ -47,7 +58,10 @@ class WordCountAndTimePlugin {
 		}
 
 		if ( get_option( 'wcp_wordcount', '1' ) ) {
-			$html .= "This post has $word_count words.<br>";
+			$html .= sprintf(
+				esc_html__( 'This post has %s words', 'wcpdomain' ),
+				$word_count
+			) . '.<br>';
 		}
 
 		if ( get_option( 'wcp_charactercount', '1' ) ) {
@@ -200,7 +214,7 @@ class WordCountAndTimePlugin {
 	public function admin_page() {
 		add_options_page(
 			'Word Count Settings',
-			'Word Count',
+			__( 'Word Count', 'wcpdomain' ),
 			'manage_options',
 			'word-count-settings-page',
 			array( $this, 'our_html' )
