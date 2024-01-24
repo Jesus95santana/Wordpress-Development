@@ -15,6 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class OurWordFilterPlugin {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'our_menu' ) );
+		if ( get_option( 'plugin_words_to_filter' ) ) {
+			add_filter( 'the_content', array( $this, 'filter_logic' ) );
+		}
 	}
 
 	public function our_menu() {
@@ -57,21 +60,50 @@ class OurWordFilterPlugin {
 		?>
 		<div class="wrap">
 			<h1>Word Filter</h1>
+			<?php
+			if ( $_POST['justsubmitted'] === 'true' ) {
+				$this->handle_form();
+			}
+			?>
 			<form method="POST">
+				<input type="hidden" name="justsubmitted" value="true">
+				<?php wp_nonce_field( 'save_filter_words', 'our_nonce' ); ?>
 				<label for="plugin_words_to_filter">
 					<p>Enter a <strong>comma-seperated</strong> list
 						of words to filter from your site's content.</p>
 				</label>
 				<div class="word-filter__flex-container">
 					<textarea name="plugin_words_to_filter" id="plugin_words_to_filter"
-								placeholder="la, la, la, la">
-					</textarea>
+								placeholder="la, la, la"><?php echo esc_textarea( get_option( 'plugin_words_to_filter' ) ); ?></textarea>
 				</div>
 				<input type="submit" name="submit" id="submit" class="button button-primary"
 						value="Save Changes">
 			</form>
 		</div>
 		<?php
+	}
+
+	public function handle_form() {
+		if ( wp_verify_nonce(
+			$_POST['our_nonce'],
+			'save_filter_words'
+		) && current_user_can( 'manage_options' ) ) {
+			update_option(
+				'plugin_words_to_filter',
+				sanitize_text_field( $_POST['plugin_words_to_filter'] )
+			);
+			?>
+			<div class="updated">
+				<p>Your filtered words were saved</p>
+			</div>
+			<?php
+		} else {
+			?>
+			<div class="error">
+				<p>Sorry, you dont have permission to perform that action</p>
+			</div>
+			<?php
+		}
 	}
 
 	public function options_sub_page() {
