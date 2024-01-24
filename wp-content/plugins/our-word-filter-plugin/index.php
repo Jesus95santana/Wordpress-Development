@@ -15,9 +15,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 class OurWordFilterPlugin {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'our_menu' ) );
+		add_action( 'admin_init', array( $this, 'our_settings' ) );
 		if ( get_option( 'plugin_words_to_filter' ) ) {
 			add_filter( 'the_content', array( $this, 'filter_logic' ) );
 		}
+	}
+
+	public function our_settings() {
+		add_settings_section( 'replacement-text-section', null, null, 'word-filter-options' );
+		register_setting( 'replacement_fields', 'replacement_text' );
+		add_settings_field(
+			'replacement-text',
+			'Filtered Text',
+			array( $this, 'replacement_field_html' ),
+			'word-filter-options',
+			'replacement-text-section'
+		);
+	}
+
+	public function replacement_field_html() {
+		?>
+		<input type="text" name="replacement_text"
+				value="<?php echo esc_attr( get_option( 'replacement_text', '***' ) ); ?>">
+		<p class="description">Leave blank to simply remove the filtered words.</p>
+		<?php
+	}
+
+	public function filter_logic( $arg ) {
+		$bad_words         = explode( ',', get_option( 'plugin_words_to_filter' ) );
+		$bad_words_trimmed = array_map( 'trim', $bad_words );
+
+		return str_ireplace(
+			$bad_words_trimmed,
+			esc_html( get_option( 'replacement_text', '****' ) ),
+			$arg
+		);
 	}
 
 	public function our_menu() {
@@ -108,7 +140,17 @@ class OurWordFilterPlugin {
 
 	public function options_sub_page() {
 		?>
-		Hello World From Optioons page
+		<div class="wrap">
+			<h1>Word Filter Options</h1>
+			<form action="options.php" method="POST">
+				<?php
+				settings_errors();
+				settings_fields( 'replacement_fields' );
+				do_settings_sections( 'word-filter-options' );
+				submit_button();
+				?>
+			</form>
+		</div>
 		<?php
 	}
 }
