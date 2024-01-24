@@ -5,9 +5,9 @@ wp.blocks.registerBlockType( 'ourplugin/are-you-paying-attention', {
 	edit() {
 		return (
 			<>
-				<h3>Hello world</h3>
-				<div>hello wrold</div>
-				<p>Hello</p>
+				<h3>sdfadsfsad</h3>
+				<div>sdafdsfasdf</div>
+				<p>Hesdafsadfasdfsdafsdfaasdfllo</p>
 			</>
 		);
 	},
