@@ -498,3 +498,10 @@ wp-config.php
 # uncomment the next line
 #/wp-content/themes
 build/
+nginx.conf
+wp-content/db.php
+wp-content/cache
+wp-content/advanced-cache.php
+wp-content/object-cache.php
+wp-content/plugins/w3-total-cache
+wp-content/w3tc-config
