@@ -46,6 +46,7 @@ function EditComponent() {
 						// 'core/heading',
 						// 'core/list',
 						'ourblocktheme/genericheading',
+						'ourblocktheme/genericbutton',
 					] }
 				/>
 			</div>
