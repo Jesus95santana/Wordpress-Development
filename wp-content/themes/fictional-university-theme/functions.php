@@ -32,3 +32,12 @@ function university_features() {
 
 
 add_action( 'after_setup_theme', 'university_features' );
+
+
+######### This part filters out any files that shouldnt be exported within all-in-one wp migration
+add_filter( 'ai1wm_exclude_content_from_export', 'ignoreCertainFiles' );
+function ignoreCertainFiles( $exclude_filters ) {
+	$exclude_filters[] = 'themes/fictional-university-theme/node_modules';
+
+	return $exclude_filters;
+}
