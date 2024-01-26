@@ -57,9 +57,17 @@ add_action( 'after_setup_theme', 'university_features' );
 //add_action( 'init', 'bannerBlock' );
 
 class JSXBlock {
-	public function __construct( $name ) {
-		$this->name = $name;
+	public function __construct( $name, $renderCallback = null ) {
+		$this->name           = $name;
+		$this->renderCallback = $renderCallback;
 		add_action( 'init', array( $this, 'onInit' ) );
+	}
+
+	public function ourRenderCallback( $attributes, $content ) {
+		ob_start();
+		require get_theme_file_path( "/our-blocks/{$this->name}.php" );
+
+		return ob_get_clean();
 	}
 
 	public function onInit() {
@@ -68,15 +76,21 @@ class JSXBlock {
 			get_stylesheet_directory_uri() . "/build/{$this->name}.js",
 			array( 'wp-blocks', 'wp-editor' )
 		);
+		$ourArgs = array(
+			'editor_script' => $this->name,
+		);
+
+		if ( $this->renderCallback ) {
+			$ourArgs['render_callback'] = array( $this, 'ourRenderCallback' );
+		}
+
 		register_block_type(
 			"ourblocktheme/{$this->name}",
-			array(
-				'editor_script' => $this->name,
-			)
+			$ourArgs
 		);
 	}
 }
 
-new JSXBlock( 'banner' );
+new JSXBlock( 'banner', true );
 new JSXBlock( 'genericheading' );
 new JSXBlock( 'genericbutton' );
