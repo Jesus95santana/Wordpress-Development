@@ -57,8 +57,9 @@ add_action( 'after_setup_theme', 'university_features' );
 //add_action( 'init', 'bannerBlock' );
 
 class JSXBlock {
-	public function __construct( $name, $renderCallback = null ) {
+	public function __construct( $name, $renderCallback = null, $data = null ) {
 		$this->name           = $name;
+		$this->data           = $data;
 		$this->renderCallback = $renderCallback;
 		add_action( 'init', array( $this, 'onInit' ) );
 	}
@@ -76,6 +77,9 @@ class JSXBlock {
 			get_stylesheet_directory_uri() . "/build/{$this->name}.js",
 			array( 'wp-blocks', 'wp-editor' )
 		);
+		if ( $this->data ) {
+			wp_localize_script( $this->name, $this->name, $this->data );
+		}
 		$ourArgs = array(
 			'editor_script' => $this->name,
 		);
@@ -91,6 +95,10 @@ class JSXBlock {
 	}
 }
 
-new JSXBlock( 'banner', true );
+new JSXBlock(
+	'banner',
+	true,
+	array( 'fallbackimage' => get_theme_file_uri( '/images/library-hero.jpg' ) )
+);
 new JSXBlock( 'genericheading' );
 new JSXBlock( 'genericbutton' );
