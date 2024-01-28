@@ -100,8 +100,6 @@ new JSXBlock(
 	true,
 	array( 'fallbackimage' => get_theme_file_uri( '/images/library-hero.jpg' ) )
 );
-new JSXBlock( 'genericheading' );
-new JSXBlock( 'genericbutton' );
 
 
 class PlaceholderBlock {
@@ -134,6 +132,11 @@ class PlaceholderBlock {
 		);
 	}
 }
+
+new JSXBlock( 'genericheading' );
+new JSXBlock( 'genericbutton' );
+new JSXBlock( 'slideshow', true );
+new JSXBlock( 'slide', true );
 
 new PlaceholderBlock( 'eventsandblogs' );
 new PlaceholderBlock( 'header' );
