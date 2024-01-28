@@ -1,3 +1,10 @@
+.our-placeholder-block {
+  padding: 20px;
+  text-align: center;
+  font-size: 1.65rem;
+  background: linear-gradient(180deg, #dedede, #adadad);
+}
+
 .remove-favorite {
   display: inline-block;
   transition: all 0.3s;
@@ -84,15 +91,19 @@
 .c-orange {
   color: $darkOrange;
 }
+
 .c-blue {
   color: $mainBlue;
 }
+
 .c-white {
   color: #fff;
 }
+
 .c-dark {
   color: #333;
 }
+
 .gray {
   color: #999999;
 }
@@ -138,15 +149,19 @@
 .social-color-facebook {
   background-color: #4862a3;
 }
+
 .social-color-twitter {
   background-color: #55acee;
 }
+
 .social-color-youtube {
   background-color: #cc1e1f;
 }
+
 .social-color-linkedin {
   background-color: #0077b5;
 }
+
 .social-color-instagram {
   background-color: #d8226b;
 }
