@@ -4,9 +4,18 @@ import {
 	FlexBlock,
 	FlexItem,
 	Icon,
+	PanelBody,
+	PanelRow,
 	TextControl,
 } from '@wordpress/components';
+import {
+	AlignmentToolbar,
+	BlockControls,
+	InspectorControls,
+	useBlockProps,
+} from '@wordpress/block-editor';
 import './index.scss';
+import { ChromePicker } from 'react-color';
 
 ( function () {
 	let locked = false;
@@ -40,6 +49,18 @@ wp.blocks.registerBlockType( 'ourplugin/are-you-paying-attention', {
 		question: { type: 'string' },
 		answers: { type: 'array', default: [ '' ] },
 		correctAnswer: { type: 'number', default: undefined },
+		bgColor: { type: 'string', default: '#EBEBEB' },
+		theAlignment: { type: 'string', default: 'left' },
+	},
+	description: 'I am a description',
+	example: {
+		attributes: {
+			question: 'Thats my name',
+			answers: [ 'test1', 'test2', 'test3' ],
+			correctAnswer: 3,
+			bgColor: '#CFE8F1',
+			theAlignment: 'center',
+		},
 	},
 	edit: EditComponent,
 	save() {
@@ -48,6 +69,11 @@ wp.blocks.registerBlockType( 'ourplugin/are-you-paying-attention', {
 } );
 
 function EditComponent( props ) {
+	const blockProps = useBlockProps( {
+		className: 'paying-attention-edit-block',
+		style: { backgroundColor: props.attributes.bgColor },
+	} );
+
 	function updateQuestion( value ) {
 		props.setAttributes( { question: value } );
 	}
@@ -70,7 +96,28 @@ function EditComponent( props ) {
 	}
 
 	return (
-		<div className="paying-attention-edit-block">
+		<div { ...blockProps }>
+			<BlockControls>
+				<AlignmentToolbar
+					value={ props.attributes.theAlignment }
+					onChange={ ( x ) => {
+						props.setAttributes( { theAlignment: x } );
+					} }
+				/>
+			</BlockControls>
+			<InspectorControls>
+				<PanelBody title={ 'Background Color' } initialOpen={ true }>
+					<PanelRow>
+						<ChromePicker
+							color={ props.attributes.bgColor }
+							onChangeComplete={ ( x ) => {
+								props.setAttributes( { bgColor: x.hex } );
+							} }
+							disableAlpha={ true }
+						/>
+					</PanelRow>
+				</PanelBody>
+			</InspectorControls>
 			<TextControl
 				label="Question:"
 				value={ props.attributes.question }
@@ -98,11 +145,12 @@ function EditComponent( props ) {
 							/>
 						</FlexBlock>
 						<FlexItem>
-							<Button>
+							<Button
+								onClick={ () => {
+									markCorrect( index );
+								} }
+							>
 								<Icon
-									onClick={ () => {
-										markCorrect( index );
-									} }
 									className={ 'mark-as-correct' }
 									icon={
 										props.attributes.correctAnswer === index
