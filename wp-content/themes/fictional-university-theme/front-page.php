@@ -17,30 +17,30 @@
         <div class="full-width-split__one">
             <div class="full-width-split__inner">
                 <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
-				<?php
-				$today          = date( 'Ymd' );
-				$homepageEvents = new WP_Query(
-					array(
-						'posts_per_page' => 2,
-						'post_type'      => 'event',
-						'meta_key'       => 'event_date',
-						'orderby'        => 'meta_value_num',
-						'order'          => 'ASC',
-						'meta_query'     => array(
-							array(
-								'key'     => 'event_date',
-								'compare' => '>=',
-								'value'   => $today,
-								'type'    => 'numeric',
-							),
-						),
-					)
-				);
+	            <?php
+	            $today          = date( 'Ymd' );
+	            $homepageEvents = new WP_Query(
+		            array(
+			            'posts_per_page' => 2,
+			            'post_type'      => 'event',
+			            'meta_key'       => 'event_date',
+			            'orderby'        => 'meta_value_num',
+			            'order'          => 'ASC',
+			            'meta_query'     => array(
+				            array(
+					            'key'     => 'event_date',
+					            'compare' => '>=',
+					            'value'   => $today,
+					            'type'    => 'numeric',
+				            ),
+			            ),
+		            )
+	            );
 
-				while ( $homepageEvents->have_posts() ) :
-					$homepageEvents->the_post();
+	            while ( $homepageEvents->have_posts() ) :
+		            $homepageEvents->the_post();
 
-					?>
+		            ?>
                     <div class="event-summary">
                         <a class="event-summary__date t-center" href="#">
 							<span class="event-summary__month">
@@ -60,13 +60,13 @@
                                         href="<?php echo the_permalink(); ?>"><?php echo the_title(); ?></a>
                             </h5>
                             <p>
-								<?php
-								if ( has_excerpt() ) {
-									echo get_the_excerpt();
-								} else {
-									echo wp_trim_words( get_the_content(), 18 );
-								}
-								?>
+					            <?php
+					            if ( has_excerpt() ) {
+						            echo get_the_excerpt();
+					            } else {
+						            echo wp_trim_words( get_the_content(), 18 );
+					            }
+					            ?>
                                 <a
                                         href="<?php echo the_permalink(); ?>"
                                         class="nu gray">Learn
@@ -74,7 +74,7 @@
                         </div>
                     </div>
 
-				<?php endwhile ?>
+	            <?php endwhile ?>
 
                 <p class="t-center no-margin"><a
                             href="<?php echo get_post_type_archive_link( 'event' ); ?>"
