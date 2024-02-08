@@ -44,11 +44,11 @@ function university_post_types() {
 	register_post_type(
 		'professor',
 		array(
-			'supports'     => array( 'title', 'editor' ),
+			'supports'     => array( 'title', 'editor', 'thumbnail' ),
 			'public'       => true,
 			'show_in_rest' => true,
 			'labels'       => array(
-				'name'          => 'Professor',
+				'name'          => 'Professors',
 				'add_new_item'  => 'Add New Professor',
 				'edit_item'     => 'Edit Professor',
 				'all_items'     => 'All Professors',
