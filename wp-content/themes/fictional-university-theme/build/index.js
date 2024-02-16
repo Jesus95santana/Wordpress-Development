@@ -151,6 +151,9 @@ class Search {
     this.previousValue = this.searchField.val();
   }
   getResults() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON('http://localhost/wp-json/wp/v2/posts?search=' + this.searchField.val(), function (posts) {
+      alert(posts[0].title.rendered);
+    });
     this.resultsDiv.html('Imagine real search');
     this.isSpinning = false;
   }

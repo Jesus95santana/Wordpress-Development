@@ -49,6 +49,13 @@ class Search {
 	}
 
 	getResults() {
+		$.getJSON(
+			'http://localhost/wp-json/wp/v2/posts?search=' +
+				this.searchField.val(),
+			function ( posts ) {
+				alert( posts[ 0 ].title.rendered );
+			}
+		);
 		this.resultsDiv.html( 'Imagine real search' );
 		this.isSpinning = false;
 	}
