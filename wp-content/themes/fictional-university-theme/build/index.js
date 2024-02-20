@@ -151,16 +151,15 @@ class Search {
     this.previousValue = this.searchField.val();
   }
   getResults() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON('http://localhost/wp-json/wp/v2/posts?search=' + this.searchField.val(), posts => {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON(universityData.root_url + '/wp-json/wp/v2/posts?search=' + this.searchField.val(), posts => {
       this.resultsDiv.html(`
 				<h2 class ="search-overlay__section-title">General Information</h2>
-				<ul class="link-list min-list">
+				${posts.length ? '<ul class="link-list min-list">' : '<p>No general information matches that search</p>'}
 				${posts.map(item => `<li><a href="${item.link}">${item.title.rendered}</a></li>`).join('')}
-				</ul>
+				${posts.length ? '</ul>' : ''}
 				`);
+      this.isSpinning = false;
     });
-    //this.resultsDiv.html( 'Imagine real search' );
-    //this.isSpinning = false;
   }
   keyPressDispatcher(e) {
     // console.log( e.keyCode );
