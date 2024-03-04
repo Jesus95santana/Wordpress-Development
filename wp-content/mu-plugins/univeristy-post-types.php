@@ -45,9 +45,8 @@ function university_post_types() {
 		'professor',
 		array(
 			'show_in_rest' => true,
-			'supports'     => array( 'title', 'editor', 'thumbnail' ),
+			'supports'     => array( 'title', 'thumbnail' ),
 			'public'       => true,
-			'show_in_rest' => true,
 			'labels'       => array(
 				'name'          => 'Professors',
 				'add_new_item'  => 'Add New Professor',

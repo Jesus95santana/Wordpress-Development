@@ -6,20 +6,20 @@ while ( have_posts() ) :
 	pageBanner();
 	?>
 
-	<div class="container container--narrow page-section">
-		<div class="metabox metabox--position-up metabox--with-home-link">
-			<p>
-				<a class="metabox__blog-home-link"
-					href="<?php echo get_post_type_archive_link( 'program' ); ?>"><i
-							class="fa fa-home"
-							aria-hidden="true"></i> All Programs
-				</a><span
-						class="metabox__main"> <?php echo the_title(); ?></span>
-			</p>
-		</div>
-		<div class="generic-content">
-			<?php the_content(); ?>
-		</div>
+    <div class="container container--narrow page-section">
+        <div class="metabox metabox--position-up metabox--with-home-link">
+            <p>
+                <a class="metabox__blog-home-link"
+                   href="<?php echo get_post_type_archive_link( 'program' ); ?>"><i
+                            class="fa fa-home"
+                            aria-hidden="true"></i> All Programs
+                </a><span
+                        class="metabox__main"> <?php echo the_title(); ?></span>
+            </p>
+        </div>
+        <div class="generic-content">
+			<?php the_field( 'main_body_content' ); ?>
+        </div>
 		<?php
 
 
@@ -56,7 +56,7 @@ while ( have_posts() ) :
                         <span class="professor-card__name"><?php the_title(); ?></span>
                     </a>
                 </li>
-				<?php
+			<?php
 			endwhile;
 			echo '</ul>';
 		}
@@ -86,17 +86,17 @@ while ( have_posts() ) :
 				),
 			)
 		);
-	if ( $homepageEvents->have_posts() ) {
-		echo '<hr class="section-break">';
-		echo '<h2 class="headline headline--medium">Upcoming ' . get_the_title() . ' Events</h2>';
+		if ( $homepageEvents->have_posts() ) {
+			echo '<hr class="section-break">';
+			echo '<h2 class="headline headline--medium">Upcoming ' . get_the_title() . ' Events</h2>';
 
-		while ( $homepageEvents->have_posts() ) {
-			$homepageEvents->the_post();
-			get_template_part( 'template-parts/content', 'event' );
+			while ( $homepageEvents->have_posts() ) {
+				$homepageEvents->the_post();
+				get_template_part( 'template-parts/content', 'event' );
+			}
 		}
-	}
-	?>
-	</div>
+		?>
+    </div>
 
 <?php endwhile; ?>
 
