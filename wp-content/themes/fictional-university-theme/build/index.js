@@ -244,7 +244,7 @@ class Search {
     </div>
     <div class="container">
         <div id="search-overlay__results">
-            hello 123
+            
         </div>
     </div>
 </div>
