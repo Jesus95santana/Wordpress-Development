@@ -31,21 +31,21 @@ function pageBanner( $args = null ) {
 		}
 	}
 	?>
-	<div class="page-banner">
-		<div class="page-banner__bg-image"
-			style="background-image: url(
-			<?php
-				echo $args['photo'];
-			?>
-					)"></div>
-		<div class="page-banner__content container container--narrow">
+    <div class="page-banner">
+        <div class="page-banner__bg-image"
+             style="background-image: url(
+		     <?php
+		     echo $args['photo'];
+		     ?>
+                     )"></div>
+        <div class="page-banner__content container container--narrow">
 
-			<h1 class="page-banner__title"><?php echo $args['title']; ?></h1>
-			<div class="page-banner__intro">
-				<p><?php echo $args['subtitle']; ?></p>
-			</div>
-		</div>
-	</div>
+            <h1 class="page-banner__title"><?php echo $args['title']; ?></h1>
+            <div class="page-banner__intro">
+                <p><?php echo $args['subtitle']; ?></p>
+            </div>
+        </div>
+    </div>
 	<?php
 }
 
@@ -120,6 +120,27 @@ function university_adjust_queries( $query ) {
 
 add_action( 'after_setup_theme', 'university_features' );
 add_action( 'pre_get_posts', 'university_adjust_queries' );
+
+// Redirect subscriber accounts out of admin and onto homepage
+add_action( 'admin_init', 'redirectSubsToFrontend' );
+
+function redirectSubsToFrontend() {
+	$ourCurrentUser = wp_get_current_user();
+	if ( count( $ourCurrentUser->roles ) === 1 && $ourCurrentUser->roles[0] === 'subscriber' ) {
+		wp_redirect( site_url( '/' ) );
+		exit;
+	}
+}
+
+add_action( 'wp_loaded', 'noSubsAdminBar' );
+
+function noSubsAdminBar() {
+	$ourCurrentUser = wp_get_current_user();
+	if ( count( $ourCurrentUser->roles ) === 1 && $ourCurrentUser->roles[0] === 'subscriber' ) {
+		show_admin_bar( false );
+	}
+}
+
 
 ######### This part filters out any files that shouldnt be exported within all-in-one wp migration
 add_filter( 'ai1wm_exclude_content_from_export', 'ignoreCertainFiles' );
