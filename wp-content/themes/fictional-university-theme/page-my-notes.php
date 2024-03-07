@@ -1,7 +1,10 @@
-<?php echo get_header(); ?>
+<?php echo get_header();
 
+if ( ! is_user_logged_in() ) {
+	wp_redirect( esc_url( site_url( '/' ) ) );
+	exit;
+}
 
-<?php
 while ( have_posts() ) :
 	the_post();
 	pageBanner(
@@ -15,59 +18,24 @@ while ( have_posts() ) :
 
 
     <div class="container container--narrow page-section">
-		<?php
-		$the_parent = wp_get_post_parent_id( get_the_ID() );
-		if ( wp_get_post_parent_id() ) :
-			?>
-            <div class="metabox metabox--position-up metabox--with-home-link">
-                <p>
-                    <a class="metabox__blog-home-link"
-                       href="<?php echo get_permalink( wp_get_post_parent_id() ); ?>"><i
-                                class="fa fa-home"
-                                aria-hidden="true"></i> Back to
-						<?php echo get_the_title( wp_get_post_parent_id() ); ?></a> <span
-                            class="metabox__main"><?php the_title(); ?></span>
-                </p>
-            </div>
-		<?php endif; ?>
+        <ul class="min-list link-list" id="my-notes">
+			<?php
+			$userNotes = new WP_Query( array(
+				'post_type'      => 'note',
+				'posts_per_page' => - 1,
+				'author'         => get_current_user_id()
+			) );
 
-		<?php
-		$test_array = get_pages(
-			array(
-				'child_of' => get_the_ID(),
-			)
-		);
-		if ( $the_parent || $test_array ) :
-			?>
-            <div class="page-links">
-                <h2 class="page-links__title"><a href="<?php echo get_permalink( $the_parent ); ?>">
-						<?php echo get_the_title( $the_parent ); ?>
-                    </a>
-                </h2>
-                <ul class="min-list">
-					<?php
-					if ( true ) {
-						if ( $the_parent ) {
-							$find_children_of = $the_parent;
-						} else {
-							$find_children_of = get_the_ID();
-						}
-						wp_list_pages(
-							array(
-								'title_li'    => null,
-								'child_of'    => $find_children_of,
-								'sort_column' => 'menu_order',
-							)
-						);
-					}
-					?>
-                </ul>
-
-            </div>
-		<?php endif ?>
-        <div class="generic-content">
-			<?php the_content(); ?>
-        </div>
+			while ( $userNotes->have_posts() ) : $userNotes->the_post() ?>
+                <li>
+                    <input class="note-title-field" value="<?php echo esc_attr( get_the_title() ); ?>">
+                    <span class="edit-note"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span>
+                    <span class="delete-note"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</span>
+                    <textarea class="note-body-field"><?php echo esc_attr( wp_strip_all_tags( get_the_content() ) ); ?>
+                    </textarea>
+                </li>
+			<?php endwhile; ?>
+        </ul>
     </div>
 
 
