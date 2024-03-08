@@ -74,6 +74,7 @@ function university_files() {
 		'universityData',
 		array(
 			'root_url' => get_site_url(),
+			'nonce'    => wp_create_nonce( 'wp_rest' ),
 		)
 	);
 }
@@ -168,6 +169,7 @@ add_filter( 'login_headertitle', 'ourLoginTitle' );
 function ourLoginTitle() {
 	return get_bloginfo( 'name' );
 }
+
 
 ######### This part filters out any files that shouldnt be exported within all-in-one wp migration
 add_filter( 'ai1wm_exclude_content_from_export', 'ignoreCertainFiles' );

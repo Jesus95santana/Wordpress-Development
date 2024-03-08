@@ -11,7 +11,21 @@ class MyNotes {
 
 	// Methods
 	deleteNote() {
-		alert( 'deleteeeeee' );
+		$.ajax( {
+			beforeSend: ( xhr ) => {
+				xhr.setRequestHeader( 'X-WP-Nonce', universityData.nonce );
+			},
+			url: universityData.root_url + '/wp-json/wp/v2/note/195',
+			type: 'DELETE',
+			success: ( response ) => {
+				console.log( 'success' );
+				console.log( response );
+			},
+			error: ( response ) => {
+				console.log( 'error' );
+				console.log( response );
+			},
+		} );
 	}
 }
 
