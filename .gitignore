@@ -497,11 +497,9 @@ wp-config.php
 # Note: If you wish to whitelist themes,
 # uncomment the next line
 #/wp-content/themes
-build/
-nginx.conf
-wp-content/db.php
-wp-content/cache
-wp-content/advanced-cache.php
-wp-content/object-cache.php
-wp-content/plugins/w3-total-cache
-wp-content/w3tc-config
+*
+!wp-content
+wp-content/**
+!wp-content/mu-plugins
+!wp-content/plugins
+!wp-content/themes
