@@ -2174,17 +2174,20 @@ class MyNotes {
   }
   events() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.delete-note').on('click', this.deleteNote);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.edit-note').on('click', this.editnote);
   }
 
   // Methods
-  deleteNote() {
+  deleteNote(e) {
+    const thisNote = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).parents('li');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
       beforeSend: xhr => {
         xhr.setRequestHeader('X-WP-Nonce', universityData.nonce);
       },
-      url: universityData.root_url + '/wp-json/wp/v2/note/195',
+      url: universityData.root_url + '/wp-json/wp/v2/note/' + thisNote.data('id'),
       type: 'DELETE',
       success: response => {
+        thisNote.slideUp();
         console.log('success');
         console.log(response);
       },
@@ -2193,6 +2196,11 @@ class MyNotes {
         console.log(response);
       }
     });
+  }
+  editnote(e) {
+    const thisNote = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).parents('li');
+    thisNote.find('.note-title-field, .note-body-field').removeAttr('readonly').addClass('note-active-field');
+    thisNote.find('.update-note').addClass('update-note--visible');
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MyNotes);
