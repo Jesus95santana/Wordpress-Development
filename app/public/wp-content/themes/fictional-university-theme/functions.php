@@ -170,6 +170,15 @@ function ourLoginTitle() {
 	return get_bloginfo( 'name' );
 }
 
+// Force note posts to be private
+add_filter( 'wp_insert_post_data', 'makeNotePrivate' );
+function makeNotePrivate( $data ) {
+	if ( $data['post_type'] === 'note' || $data['post_status'] != 'trash' ) {
+		$data['post_status'] = 'private';
+	}
+
+	return $data;
+}
 
 ######### This part filters out any files that shouldnt be exported within all-in-one wp migration
 add_filter( 'ai1wm_exclude_content_from_export', 'ignoreCertainFiles' );
