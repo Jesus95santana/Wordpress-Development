@@ -2192,6 +2192,9 @@ class MyNotes {
         thisNote.slideUp();
         console.log('success');
         console.log(response);
+        if (response.userNoteCount < 5) {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.note-limit-message').removeClass('active');
+        }
       },
       error: response => {
         console.log('error');
@@ -2248,11 +2251,14 @@ class MyNotes {
                     <span class="update-note btn btn--blue btn--small"><i class="fa fa-arrow-right" aria-hidden="true"></i>Save</span>
                 </li>
 				`).prependTo('#my-notes').hide().slideDown();
-        console.log('success');
+        console.log('Congrats');
         console.log(response);
       },
       error: response => {
-        console.log('error');
+        if (response.responseText === 'You have reached your note limit.') {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.note-limit-message').addClass('active');
+        }
+        console.log('Sorry');
         console.log(response);
       }
     });
