@@ -2066,9 +2066,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_HeroSlider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/HeroSlider */ "./src/modules/HeroSlider.js");
 /* harmony import */ var _modules_Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/Search */ "./src/modules/Search.js");
 /* harmony import */ var _modules_MyNotes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/MyNotes */ "./src/modules/MyNotes.js");
+/* harmony import */ var _modules_Like_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/Like.js */ "./src/modules/Like.js");
 
 
 // Our modules / classes
+
 
 
 
@@ -2079,6 +2081,7 @@ const mobileMenu = new _modules_MobileMenu__WEBPACK_IMPORTED_MODULE_1__["default
 const heroSlider = new _modules_HeroSlider__WEBPACK_IMPORTED_MODULE_2__["default"]();
 const liveSearch = new _modules_Search__WEBPACK_IMPORTED_MODULE_3__["default"]();
 const myNotes = new _modules_MyNotes__WEBPACK_IMPORTED_MODULE_4__["default"]();
+const like = new _modules_Like_js__WEBPACK_IMPORTED_MODULE_5__["default"]();
 
 /***/ }),
 
@@ -2121,6 +2124,43 @@ class HeroSlider {
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeroSlider);
+
+/***/ }),
+
+/***/ "./src/modules/Like.js":
+/*!*****************************!*\
+  !*** ./src/modules/Like.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+class Like {
+  constructor() {
+    alert('testing from like.js');
+  }
+  events() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.like-box').on('click', this.ourClickDispatcher.bind(this));
+  }
+
+  // methods
+  ourClickDispatcher() {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.like-box').data('exists') === 'yes') {
+      this.deleteLike();
+    } else {
+      this.createLike();
+    }
+  }
+  createLike() {}
+  deleteLike() {}
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Like);
 
 /***/ }),
 
@@ -2485,6 +2525,17 @@ class Search {
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+
+/***/ }),
+
+/***/ "jquery":
+/*!*************************!*\
+  !*** external "jQuery" ***!
+  \*************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["jQuery"];
 
 /***/ }),
 
