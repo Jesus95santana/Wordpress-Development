@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 class Like {
 	constructor() {
-		alert( 'testing from like.js' );
+		this.events();
 	}
 
 	events() {
@@ -10,17 +10,22 @@ class Like {
 	}
 
 	// methods
-	ourClickDispatcher() {
-		if ( $( '.like-box' ).data( 'exists' ) === 'yes' ) {
+	ourClickDispatcher( e ) {
+		const currentLikeBox = $( e.target ).closest( '.like-box' );
+		if ( currentLikeBox.data( 'exists' ) === 'yes' ) {
 			this.deleteLike();
 		} else {
 			this.createLike();
 		}
 	}
 
-	createLike() {}
+	createLike() {
+		alert( 'create test message' );
+	}
 
-	deleteLike() {}
+	deleteLike() {
+		alert( 'delete test message' );
+	}
 }
 
 export default Like;

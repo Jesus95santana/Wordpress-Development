@@ -2143,22 +2143,27 @@ __webpack_require__.r(__webpack_exports__);
 
 class Like {
   constructor() {
-    alert('testing from like.js');
+    this.events();
   }
   events() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.like-box').on('click', this.ourClickDispatcher.bind(this));
   }
 
   // methods
-  ourClickDispatcher() {
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.like-box').data('exists') === 'yes') {
+  ourClickDispatcher(e) {
+    const currentLikeBox = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).closest('.like-box');
+    if (currentLikeBox.data('exists') === 'yes') {
       this.deleteLike();
     } else {
       this.createLike();
     }
   }
-  createLike() {}
-  deleteLike() {}
+  createLike() {
+    alert('create test message');
+  }
+  deleteLike() {
+    alert('delete test message');
+  }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Like);
 
