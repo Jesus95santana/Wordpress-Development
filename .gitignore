@@ -5,21 +5,21 @@
 !.gitignore
 
 # Include specific wp-content directories
-!app/
-!app/public
-!app/public/wp-content/
-!app/public/wp-content/mu-plugins/
-!app/public/wp-content/plugins/
-!app/public/wp-content/themes/
+!
+!public
+!public/wp-content/
+!public/wp-content/mu-plugins/
+!public/wp-content/plugins/
+!public/wp-content/themes/
 
 # Include everything within specific wp-content directories
-!app/public/wp-content/mu-plugins/**
-!app/public/wp-content/plugins/**
-!app/public/wp-content/themes/**
+!public/wp-content/mu-plugins/**
+!public/wp-content/plugins/**
+!public/wp-content/themes/**
 
 # Remove specific plugins
-app/public/wp-content/plugins/w3-total-cache
-app/public/wp-content/themes/twentytwentyfour
+public/wp-content/plugins/w3-total-cache
+public/wp-content/themes/twentytwentyfour
 
 .DS_Store
 node_modules
