@@ -2162,6 +2162,9 @@ class Like {
     jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
       url: universityData.root_url + '/wp-json/university/v1/manageLike',
       type: 'POST',
+      data: {
+        professorId: 789
+      },
       success: response => {
         console.log(response);
       },

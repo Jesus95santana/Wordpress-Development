@@ -23,6 +23,7 @@ class Like {
 		$.ajax( {
 			url: universityData.root_url + '/wp-json/university/v1/manageLike',
 			type: 'POST',
+			data: { professorId: 789 },
 			success: ( response ) => {
 				console.log( response );
 			},
