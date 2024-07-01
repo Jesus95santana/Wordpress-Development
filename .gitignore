@@ -7,6 +7,7 @@
 # Exclude Theme & Plugin directories
 !public/
 !public/wp-content/
+!public/wp-content/**
 !public/wp-content/themes/
 !public/wp-content/themes/**
 !public/wp-content/plugins/
