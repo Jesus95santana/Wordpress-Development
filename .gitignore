@@ -5,21 +5,23 @@
 !.gitignore
 
 # Exclude Theme & Plugin directories
-!public
+!public/
 !public/wp-content/
 !public/wp-content/themes/
+!public/wp-content/themes/**
 !public/wp-content/plugins/
+!public/wp-content/plugins/**
 !public/wp-content/mu-plugins/
 !public/wp-content/mu-plugins/**
 
 # Ignore All themes Except
-public/wp-content/themes/*
+/public/wp-content/themes/*
 !public/wp-content/themes/fictional-block-theme/
 !public/wp-content/themes/fictional-university-theme/
 !public/wp-content/themes/full-site-theme/
 
 # Ignore All plugins Except
-public/wp-content/plugins/*
+/public/wp-content/plugins/*
 !public/wp-content/plugins/are-you-paying-attention/
 !public/wp-content/plugins/manual-image-crop
 !public/wp-content/plugins/our-first-unique-plugin/
