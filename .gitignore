@@ -19,6 +19,7 @@
 !public/wp-content/themes/fictional-block-theme/
 !public/wp-content/themes/fictional-university-theme/
 !public/wp-content/themes/full-site-theme/
+!public/wp-content/themes/SantanaDrive/
 
 # Ignore All plugins Except
 /public/wp-content/plugins/*

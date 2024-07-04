@@ -1,0 +1,19 @@
+{
+  "name": "santanadrive",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "wp-scripts start blocks/banner.js",
+    "dev": "wp-scripts start",
+    "devFast": "wp-scripts start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@wordpress/scripts": "^19.2.4",
+    "axios": "^0.21.1"
+  }
+}
