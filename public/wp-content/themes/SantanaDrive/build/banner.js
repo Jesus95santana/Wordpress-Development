@@ -113,15 +113,15 @@ function EditComponent() {
     className: "text-3xl font-bold underline"
   }, "I am done"));
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "test text-green-950"
-  }, "I am a test in green?"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-5xl font-bold text-green-950 underline p-[20]"
-  }, "I have changed again agian"));
+    className: "p-6 max-w-sm mx-auto bg-green-200 rounded-xl shadow-md space-y-4"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
+    allowedBlocks: ["core/paragraph", "core/heading", "core/list"]
+  })));
 }
 function SaveComponent() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "text-3xl font-bold text-blue-500"
-  }, "Hello world"));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "p-6 max-w-sm mx-auto bg-green-200 rounded-xl shadow-md space-y-4"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null));
 }
 /******/ })()
 ;

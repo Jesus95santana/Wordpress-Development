@@ -5,7 +5,7 @@ module.exports = {
 		'./templates/**/*.php', // All PHP files within the templates directory
 		'./**/*.php', // Any other PHP files in your theme
 		'./css/*.scss',
-		'./css/tailwind.css',
+		'Dummy.html',
 	],
 	theme: {
 		extend: {},
