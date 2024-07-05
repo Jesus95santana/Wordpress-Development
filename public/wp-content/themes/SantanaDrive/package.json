@@ -15,5 +15,12 @@
   "dependencies": {
     "@wordpress/scripts": "^19.2.4",
     "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39",
+    "postcss-cli": "^11.0.0",
+    "sass": "^1.77.6",
+    "tailwindcss": "^3.4.4"
   }
 }
