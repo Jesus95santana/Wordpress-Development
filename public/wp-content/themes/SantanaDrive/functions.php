@@ -17,11 +17,20 @@ function features() {
 add_action( 'after_setup_theme', 'features' );
 
 // Adding Blocks
-function bannerFunction() {
-	wp_register_script( 'bannerScriptName', get_stylesheet_directory_uri() . '/build/banner.js', array( 'wp-blocks', 'wp-editor' ) );
-	register_block_type( 'blocktheme/banner', array(
-		'editor_script' => 'bannerScriptName',
-	) );
+
+class JSXBlock {
+	function __construct( $name ) {
+		$this->name = $name;
+		add_action( 'init', [ $this, 'onInit' ] );
+	}
+
+	function onInit() {
+		wp_register_script( $this->name, get_stylesheet_directory_uri() . "/build/{$this->name}.js", array( 'wp-blocks', 'wp-editor' ) );
+		register_block_type( "blocktheme/{$this->name}", array(
+			'editor_script' => "{$this->name}",
+		) );
+	}
 }
 
-add_action( 'init', 'bannerFunction' );
+new JSXBlock( 'banner' );
+new JSXBlock( 'genericheading' );

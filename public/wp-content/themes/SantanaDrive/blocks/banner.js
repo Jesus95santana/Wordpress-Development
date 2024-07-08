@@ -1,6 +1,7 @@
 import { InnerBlocks } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
 
-wp.blocks.registerBlockType( 'blocktheme/banner', {
+registerBlockType( 'blocktheme/banner', {
 	title: 'Banner',
 	edit: EditComponent,
 	save: SaveComponent,
@@ -16,7 +17,14 @@ function EditComponent() {
 	return (
 		<>
 			<div className="p-6 max-w-sm mx-auto bg-green-200 rounded-xl shadow-md space-y-4">
-				<InnerBlocks allowedBlocks={["core/paragraph", "core/heading", "core/list"]} />
+				<InnerBlocks
+					allowedBlocks={ [
+						'core/paragraph',
+						'core/heading',
+						'core/list',
+						'blocktheme/genericheading',
+					] }
+				/>
 			</div>
 		</>
 	);
