@@ -34,3 +34,4 @@ class JSXBlock {
 
 new JSXBlock( 'banner' );
 new JSXBlock( 'genericheading' );
+new JSXBlock( 'genericbutton' );

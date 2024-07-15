@@ -23,6 +23,7 @@ function EditComponent() {
 						'core/heading',
 						'core/list',
 						'blocktheme/genericheading',
+						'blocktheme/genericbutton',
 					] }
 				/>
 			</div>

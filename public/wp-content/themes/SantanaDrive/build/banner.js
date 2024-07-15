@@ -128,7 +128,7 @@ function EditComponent() {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-6 max-w-sm mx-auto bg-green-200 rounded-xl shadow-md space-y-4"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
-    allowedBlocks: ['core/paragraph', 'core/heading', 'core/list', 'blocktheme/genericheading']
+    allowedBlocks: ['core/paragraph', 'core/heading', 'core/list', 'blocktheme/genericheading', 'blocktheme/genericbutton']
   })));
 }
 function SaveComponent() {
