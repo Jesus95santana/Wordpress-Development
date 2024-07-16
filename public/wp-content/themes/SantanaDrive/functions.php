@@ -35,4 +35,7 @@ class JSXBlock {
 new JSXBlock( 'banner' );
 new JSXBlock( 'genericheading' );
 new JSXBlock( 'genericbutton' );
-new JSXBlock( 'homebanner' );
+new JSXBlock( 'sd-banner' );
+new JSXBlock( 'sd-button' );
+new JSXBlock( 'sd-heading' );
+new JSXBlock( 'sd-paragraph' );
