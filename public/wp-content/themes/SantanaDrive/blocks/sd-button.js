@@ -18,14 +18,12 @@ function EditComponent( props ) {
 	}
 
 	return (
-		<div className="buttonWrapper">
+		<div className={ 'ButtonWrapper' }>
 			<BlockControls>
 				<ToolbarGroup>
 					<ToolbarButton
-						isPressed={ props.attributes.size === '5xl' }
-						onClick={ () =>
-							props.setAttributes( { size: '5xl' } )
-						}
+						isPressed={ props.attributes.size === 'xl' }
+						onClick={ () => props.setAttributes( { size: 'xl' } ) }
 					>
 						Large
 					</ToolbarButton>
@@ -40,9 +38,7 @@ function EditComponent( props ) {
 					</ToolbarButton>
 					<ToolbarButton
 						isPressed={ props.attributes.size === 'sm' }
-						onClick={ () =>
-							props.setAttributes( { size: 'sm' } )
-						}
+						onClick={ () => props.setAttributes( { size: 'sm' } ) }
 					>
 						Small
 					</ToolbarButton>
@@ -51,7 +47,7 @@ function EditComponent( props ) {
 			<RichText
 				allowedFormats={ [] }
 				tagName={ 'a' }
-				className={ `px-6 py-2 bg-blue-600 text-white text-xl rounded-2xl text-${ props.attributes.size }` }
+				className={ `px-6 py-2 bg-blue-600 text-white rounded-2xl text-${ props.attributes.size }` }
 				value={ props.attributes.text }
 				onChange={ handleTextChange }
 			/>
@@ -61,11 +57,13 @@ function EditComponent( props ) {
 
 function SaveComponent( props ) {
 	return (
-		<a
-			href="#"
-			className={ `btn text-green-600 text-${ props.attributes.size }` }
-		>
-			{ props.attributes.text }
-		</a>
+		<div className="ButtonWrapper">
+			<a
+				href="#"
+				className={ `px-6 py-2 bg-blue-600 text-white rounded-2xl text-${ props.attributes.size } ` }
+			>
+				{ props.attributes.text }
+			</a>
+		</div>
 	);
 }

@@ -2,11 +2,11 @@ import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { RichText, BlockControls } from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
 
-registerBlockType( 'blocktheme/genericheading', {
+registerBlockType( 'ourblocktheme/genericheading', {
 	title: 'Generic Heading',
 	attributes: {
 		text: { type: 'string' },
-		size: { type: 'string', default: '5xl' },
+		size: { type: 'string', default: 'large' },
 	},
 	edit: EditComponent,
 	save: SaveComponent,
@@ -18,50 +18,54 @@ function EditComponent( props ) {
 	}
 
 	return (
-		<div className="p-6 max-w-sm mx-auto bg-green-200 rounded-xl shadow-md space-y-4">
+		<>
 			<BlockControls>
 				<ToolbarGroup>
 					<ToolbarButton
-						isPressed={ props.attributes.size === '5xl' }
-						onClick={ () => props.setAttributes( { size: '5xl' } ) }
+						isPressed={ props.attributes.size === 'large' }
+						onClick={ () =>
+							props.setAttributes( { size: 'large' } )
+						}
 					>
 						Large
 					</ToolbarButton>
 					<ToolbarButton
-						isPressed={ props.attributes.size === 'base' }
+						isPressed={ props.attributes.size === 'medium' }
 						onClick={ () =>
-							props.setAttributes( { size: 'base' } )
+							props.setAttributes( { size: 'medium' } )
 						}
 					>
 						Medium
 					</ToolbarButton>
 					<ToolbarButton
-						isPressed={ props.attributes.size === 'sm' }
-						onClick={ () => props.setAttributes( { size: 'sm' } ) }
+						isPressed={ props.attributes.size === 'small' }
+						onClick={ () =>
+							props.setAttributes( { size: 'small' } )
+						}
 					>
 						Small
 					</ToolbarButton>
 				</ToolbarGroup>
 			</BlockControls>
 			<RichText
-				allowedFormats={ [ 'core/bold' ] }
-				tagName={ 'h1' }
-				className={ `text-blue-600 text-${ props.attributes.size }` }
+				allowedFormats={ [ 'core/bold', 'core/italic' ] }
+				tagName="h1"
+				className={ `headline headline--${ props.attributes.size }` }
 				value={ props.attributes.text }
 				onChange={ handleTextChange }
 			/>
-		</div>
+		</>
 	);
 }
 
 function SaveComponent( props ) {
 	function createTagName() {
 		switch ( props.attributes.size ) {
-			case '5xl':
+			case 'large':
 				return 'h1';
-			case 'base':
+			case 'medium':
 				return 'h2';
-			case 'sm':
+			case 'small':
 				return 'h3';
 		}
 	}
@@ -70,7 +74,7 @@ function SaveComponent( props ) {
 		<RichText.Content
 			tagName={ createTagName() }
 			value={ props.attributes.text }
-			className={ `text-blue-600 text-${ props.attributes.size }` }
+			className={ `headline headline--${ props.attributes.size }` }
 		/>
 	);
 }

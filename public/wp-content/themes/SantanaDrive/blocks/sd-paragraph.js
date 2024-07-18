@@ -28,10 +28,8 @@ function EditComponent( props ) {
 						Large
 					</ToolbarButton>
 					<ToolbarButton
-						isPressed={ props.attributes.size === 'base' }
-						onClick={ () =>
-							props.setAttributes( { size: 'base' } )
-						}
+						isPressed={ props.attributes.size === '2xl' }
+						onClick={ () => props.setAttributes( { size: '2xl' } ) }
 					>
 						Medium
 					</ToolbarButton>
@@ -58,11 +56,11 @@ function SaveComponent( props ) {
 	function createTagName() {
 		switch ( props.attributes.size ) {
 			case '5xl':
-				return 'h1';
-			case 'base':
-				return 'h2';
+				return 'h4';
+			case '2xl':
+				return 'p';
 			case 'sm':
-				return 'h3';
+				return 'span';
 		}
 	}
 
@@ -70,7 +68,7 @@ function SaveComponent( props ) {
 		<RichText.Content
 			tagName={ createTagName() }
 			value={ props.attributes.text }
-			className={ `text-blue-600 text-${ props.attributes.size }` }
+			className={ `max-w-lg py-4 leading-relaxed text-${ props.attributes.size }` }
 		/>
 	);
 }

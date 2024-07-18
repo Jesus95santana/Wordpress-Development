@@ -6,7 +6,7 @@ registerBlockType( 'blocktheme/sd-heading', {
 	title: 'SD Heading',
 	attributes: {
 		text: { type: 'string' },
-		size: { type: 'string', default: '5xl' },
+		size: { type: 'string', default: '4xl' },
 	},
 	edit: EditComponent,
 	save: SaveComponent,
@@ -18,12 +18,12 @@ function EditComponent( props ) {
 	}
 
 	return (
-		<div >
+		<div>
 			<BlockControls>
 				<ToolbarGroup>
 					<ToolbarButton
-						isPressed={ props.attributes.size === '5xl' }
-						onClick={ () => props.setAttributes( { size: '5xl' } ) }
+						isPressed={ props.attributes.size === '4xl' }
+						onClick={ () => props.setAttributes( { size: '4xl' } ) }
 					>
 						Large
 					</ToolbarButton>
@@ -45,8 +45,8 @@ function EditComponent( props ) {
 			</BlockControls>
 			<RichText
 				allowedFormats={ [ 'core/bold' ] }
-				tagName={ 'h3' }
-				className={ `text-red font-bold max-w-md text-${ props.attributes.size }` }
+				tagName={ 'h1' }
+				className={ `font-bold max-w-md text-${ props.attributes.size }` }
 				value={ props.attributes.text }
 				onChange={ handleTextChange }
 			/>
@@ -57,7 +57,7 @@ function EditComponent( props ) {
 function SaveComponent( props ) {
 	function createTagName() {
 		switch ( props.attributes.size ) {
-			case '5xl':
+			case '4xl':
 				return 'h1';
 			case 'base':
 				return 'h2';
@@ -70,7 +70,7 @@ function SaveComponent( props ) {
 		<RichText.Content
 			tagName={ createTagName() }
 			value={ props.attributes.text }
-			className={ `text-blue-600 text-${ props.attributes.size }` }
+			className={ `font-bold max-w-md text-${ props.attributes.size }` }
 		/>
 	);
 }
