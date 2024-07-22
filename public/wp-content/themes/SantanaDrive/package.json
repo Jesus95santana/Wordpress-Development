@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@wordpress/icons": "^10.3.0",
     "@wordpress/scripts": "^19.2.4",
     "axios": "^0.21.1"
   },

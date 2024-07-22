@@ -20,6 +20,7 @@
 !public/wp-content/themes/fictional-university-theme/
 !public/wp-content/themes/full-site-theme/
 !public/wp-content/themes/SantanaDrive/
+!public/wp-content/themes/Gutenburg/
 
 # Ignore All plugins Except
 /public/wp-content/plugins/*
