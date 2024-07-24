@@ -16,26 +16,10 @@ function features() {
 
 add_action( 'after_setup_theme', 'features' );
 
-// Adding Blocks
-
-class JSXBlock {
-	function __construct( $name ) {
-		$this->name = $name;
-		add_action( 'init', [ $this, 'onInit' ] );
-	}
-
-	function onInit() {
-		wp_register_script( $this->name, get_stylesheet_directory_uri() . "/build/{$this->name}.js", array( 'wp-blocks', 'wp-editor' ) );
-		register_block_type( "blocktheme/{$this->name}", array(
-			'editor_script' => "{$this->name}",
-		) );
-	}
+// Register new blocks
+function new_blocks() {
+	register_block_type_from_metadata(__DIR__ . '/build/banner');
 }
 
-new JSXBlock( 'banner' );
-new JSXBlock( 'genericheading' );
-new JSXBlock( 'genericbutton' );
-new JSXBlock( 'sd-banner' );
-new JSXBlock( 'sd-button' );
-new JSXBlock( 'sd-heading' );
-new JSXBlock( 'sd-paragraph' );
+add_action('init', 'new_blocks');
+
