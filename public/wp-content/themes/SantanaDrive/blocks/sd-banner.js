@@ -16,16 +16,16 @@ function EditComponent() {
 			<div className="wrapper flex justify-around m-auto max-w-6xl">
 				<div className="leftSection flex flex-col justify-center">
 					<InnerBlocks
-						allowedBlocks={[
+						allowedBlocks={ [
 							'blocktheme/sd-heading',
 							'blocktheme/sd-button',
 							'blocktheme/sd-paragraph',
-						]}
+						] }
 					/>
 				</div>
 				<div className="rightSection ">
 					<figure className="max-w-md">
-						<img alt="" className="object-cover" src=""/>
+						<img alt="" className="object-cover" src="" />
 					</figure>
 				</div>
 			</div>
@@ -42,7 +42,7 @@ function SaveComponent() {
 				</div>
 				<div className="rightSection ">
 					<figure className="max-w-md">
-						<img alt="" className="object-cover" src=""/>
+						<img alt="" className="object-cover" src="" />
 					</figure>
 				</div>
 			</div>
